@@ -3,8 +3,9 @@ __author__ = 'coenjonker'
 import sys
 import csv
 
-from functions import *
+import pandas as pd
 
+from functions import *
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -15,6 +16,9 @@ if __name__ == "__main__":
     output = sys.argv[3]
 
     data = read_data(train)
+
+    counts_pr = pd.DataFrame(data.groupby('PdDistrict').count()['Dates'])
+    count_dict = dict([x for x in counts_pr['Dates'].iteritems()])
 
     counts = pd.DataFrame(data.groupby('Category').count()['Dates'])
     counts['Ratio'] = counts / counts.sum()
@@ -32,18 +36,4 @@ if __name__ == "__main__":
                 rid = row[0]
                 result = [rid] + ratios
                 writer.writerow(result)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
