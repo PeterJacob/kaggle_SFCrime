@@ -11,11 +11,12 @@ class Model(object):
         :param test_data_point:
         :return:
         """
+        # TODO: Dat hele Id gedoe is irritant. Zou centraal moeten worden gehandeld.
         return dict()
 
     def get_classes(self):
         """
-        Returns list of possible output classes
+        Returns list of possible output classes and case Id
         :return:
         """
-        return []
+        return ['Id'] + self.classes

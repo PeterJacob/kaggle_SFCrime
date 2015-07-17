@@ -1,4 +1,4 @@
 __author__ = 'coenjonker'
 
 
-from simplemodels import MostLikelyClassModel
+from simplemodels import MostLikelyClassModel, MostLikeClassPerRegionModel
