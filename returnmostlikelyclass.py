@@ -3,16 +3,7 @@ __author__ = 'coenjonker'
 import sys
 import csv
 
-import pandas as pd
-
-
-def read_data(filename):
-    """
-    Useless function. Perhaps do some prepping here later
-    :param filename:
-    :return:
-    """
-    return pd.read_csv(filename)
+from functions import *
 
 
 if __name__ == "__main__":
