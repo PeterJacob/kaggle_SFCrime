@@ -1,9 +1,8 @@
 __author__ = 'coenjonker'
 
 import sys
-import csv
 
-from functions import *
+from primitive.functions import *
 
 
 if __name__ == "__main__":

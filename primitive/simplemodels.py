@@ -1,9 +1,8 @@
 __author__ = 'coenjonker'
 
-import numpy as np
 import pandas as pd
 
-from model import Model
+from primitive.model import Model
 
 
 class MostLikelyClassModel(Model):
@@ -21,8 +20,12 @@ class MostLikelyClassModel(Model):
         return dict(zip(self.get_classes(), data_out))
 
 
-
 class MostLikeClassPerRegionModel(MostLikelyClassModel):
+
+    def processRatio(self, r):
+        if r < 0.01:
+            return 0
+        return round(r, 4)
 
     def train(self, train_data):
         super(MostLikeClassPerRegionModel, self).train(train_data)
@@ -40,7 +43,7 @@ class MostLikeClassPerRegionModel(MostLikelyClassModel):
             counts = pd.DataFrame(region_data.groupby('Category').count()['Dates'])
             counts['Ratio'] = counts / counts.sum()
             self.region_ratios[region] = dict(
-                [(x[0], round(x[1], 4)) for x in counts['Ratio'].iteritems()]
+                [(x[0], self.processRatio(x[1])) for x in counts['Ratio'].iteritems()]
             )
 
     def evaluate(self, test_data_point):

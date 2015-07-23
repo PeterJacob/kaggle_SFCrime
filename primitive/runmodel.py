@@ -2,9 +2,7 @@ __author__ = 'coenjonker'
 
 from argparse import ArgumentParser
 
-
-from allmodels import *
-from functions import read_data, write_data
+from primitive.functions import read_data, write_data
 
 
 if __name__ == "__main__":
