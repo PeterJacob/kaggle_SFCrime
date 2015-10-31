@@ -3,7 +3,7 @@ __author__ = 'coenjonker'
 
 class Model(object):
 
-    def __init__(self, names, classes):
+    def __init__(self, classes, names):
         self.classes_ = classes
         self.names = names
 

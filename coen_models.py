@@ -2,11 +2,12 @@ __author__ = 'coenjonker'
 
 import pandas as pd
 import numpy as np
+from model import Model
 
-class MostLikelyClassPerRegion(object):
+class MostLikelyClassPerRegion(Model):
 
-    def __init__(self):
-        pass
+    def __init__(self, classes, names):
+        super(MostLikelyClassPerRegion, self).__init__(classes, names)
 
     def processRatio(self, r):
         if r < 0.01:
@@ -17,7 +18,6 @@ class MostLikelyClassPerRegion(object):
         counts_district = pd.DataFrame(data.groupby('PdDistrict').count()['Dates'])
         count_dict = dict([x for x in counts_district['Dates'].iteritems()])
         regions = count_dict.keys()
-        self.classes = pd.unique(data.Category.ravel())
         self.region_ratios = dict()
 
         for region in regions:
@@ -32,7 +32,7 @@ class MostLikelyClassPerRegion(object):
         print test_data_point
         this_region_ratios = self.region_ratios[test_data_point[3]]
 
-        for c in self.classes:
+        for c in self.classes_:
             if c not in this_region_ratios:
                 this_region_ratios[c] = 0.0
         return this_region_ratios
