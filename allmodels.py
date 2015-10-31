@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from collections import Counter
 
-class NearestNeighborTimeSlice():
+class NearestNeighborTimeSlice:
     def __init__(self, len_window, classes, names, n_neighbors):
         self.len_win = len_window
         self.classes_ = classes
