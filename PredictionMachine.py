@@ -9,10 +9,10 @@ class PredictionMachine(object):
     # Trains and runs a classifier supplied in the init
     # Returns the error
     
-    def __init__(self, classifier):
+    def __init__(self, classifier, features_path, labels_path):
         self.cls = classifier
-        self.X_path = '/home/peter/Documents/kaggle_SFCrime/data/train.npy'
-        self.Y_path = '/home/peter/Documents/kaggle_SFCrime/data/labels.npy'
+        self.X_path = features_path
+        self.Y_path = labels_path
         self.X = None
         self.Y = None
             
