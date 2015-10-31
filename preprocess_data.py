@@ -18,6 +18,8 @@ if __name__ == "__main__":
     classes = np.array(pd.unique(data.Category.ravel()))
 
     data.drop('Category', 1)
+    data.drop('Descript', 1)
+    data.drop('Resolution', 1)
     names = np.array(data.columns)
 
     np_train = np.array(data.values)
