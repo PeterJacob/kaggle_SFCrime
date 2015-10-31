@@ -10,22 +10,19 @@ from load_data import load_data
 
 if __name__ == "__main__":
     train_f = sys.argv[1]
-    test_f = sys.argv[2]
-    out_dir = sys.argv[3]
+    out_dir = sys.argv[2]
 
-    train_data = load_data(train_f)
-    test_data = load_data(test_f)
+    data = load_data(train_f)
 
-    names = np.array(train_data.columns)
-    classes = np.array(pd.unique(train_data.Category.ravel()))
+    labels = data['Category']
+    classes = np.array(pd.unique(data.Category.ravel()))
 
-    test_names = np.array(test_data.columns)
+    data.drop('Category', 1)
+    names = np.array(data.columns)
 
-    np_train = np.array(train_data.values)
-    np_test = np.array(test_data.values)
+    np_train = np.array(data.values)
 
     np.save(os.path.join(out_dir, 'names.npy'), names)
     np.save(os.path.join(out_dir, 'classes.npy'), classes)
     np.save(os.path.join(out_dir, 'train.npy'), np_train)
-    np.save(os.path.join(out_dir, 'test.npy'), np_test)
-    np.save(os.path.join(out_dir, 'test_names.npy'), test_names)
+    np.save(os.path.join(out_dir, 'labels.npy'), np_test)
