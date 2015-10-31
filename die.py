@@ -14,10 +14,11 @@ def play_game():
         
         if last_digit==6 and current_digit==1:
             return 3
+        
+        last_digit = current_digit
 
 winner = []
-for i in range(100):
-    print i
+for i in range(1000000):
     winner.append(play_game())
 
 winner = np.array(winner)
