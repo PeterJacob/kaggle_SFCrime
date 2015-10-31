@@ -25,4 +25,4 @@ if __name__ == "__main__":
     np.save(os.path.join(out_dir, 'names.npy'), names)
     np.save(os.path.join(out_dir, 'classes.npy'), classes)
     np.save(os.path.join(out_dir, 'train.npy'), np_train)
-    np.save(os.path.join(out_dir, 'labels.npy'), np_test)
+    np.save(os.path.join(out_dir, 'labels.npy'), labels)
