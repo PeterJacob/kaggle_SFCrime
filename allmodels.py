@@ -4,15 +4,12 @@ from functions import *
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from collections import Counter
+from model import Model
 
-class NearestNeighborTimeSlice:
+class NearestNeighborTimeSlice(Model):
     def __init__(self, len_window, classes, names, n_neighbors):
+        super(NearestNeighborTimeSlice, self).__init__(classes, names)
         self.len_win = len_window
-        self.classes_ = classes
-        expected_names = [u'Id', u'Dates', u'DayOfWeek', u'PdDistrict', u'Address', u'X', u'Y', 'WeekNumber']
-        self.names = names
-        if not np.all(np.in1d(expected_names, names)):
-            raise Exception("Not all expected variables supplied")
         self.nn_clf = NearestNeighbors(n_neighbors)
 
 
