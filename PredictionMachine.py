@@ -1,4 +1,5 @@
 import numpy as np
+import sklearn.preprocessing
 import sklearn.cross_validation
 import sklearn.metrics
 
@@ -18,15 +19,13 @@ class PredictionMachine(object):
     def run(self):
         self.read_data()
         cf = self.create_folds()
+        
         for train_idx, test_idx in cf:
             X_train, Y_train = self.X[train_idx], self.Y[train_idx]
             X_test,  Y_test  = self.X[test_idx], self.Y[test_idx]
             
-            cls = self.cls()
             cls.fit(X_train, Y_train)
             Y_prob = cls.predict_proba(X_test)
-            print cls.classes_
-            print Y_prob
             
             self.print_error(Y_prob, Y_test, cls.classes_)
     
@@ -42,8 +41,10 @@ class PredictionMachine(object):
         
         return folds
 
-    def print_error(self, Y_prob, Y_test, classes):
-        Y_test_matrix = np.zeros((self.Y.shape[1], ))
+    def print_error(self, Y_prob, Y_test, classes_):
+        lb = sklearn.preprocessing.LabelBinarizer()
+        lb.classes_ = classes_
+        Y_test_matrix = lb.transform(Y_test)
         
-        ll = sklearn.metrics.log_loss(Y_prob, Y_test_matrix)
+        ll = sklearn.metrics.log_loss(Y_test_matrix, Y_prob)
         print ll
