@@ -11,8 +11,8 @@ class PredictionMachine(object):
     
     def __init__(self, classifier):
         self.cls = classifier
-        self.X_path = '/home/peter/Downloads/X_sample.npy'
-        self.Y_path = '/home/peter/Downloads/Y_sample.npy'
+        self.X_path = '/home/peter/Documents/kaggle_SFCrime/data/train.npy'
+        self.Y_path = '/home/peter/Documents/kaggle_SFCrime/data/labels.npy'
         self.X = None
         self.Y = None
             
@@ -24,10 +24,10 @@ class PredictionMachine(object):
             X_train, Y_train = self.X[train_idx], self.Y[train_idx]
             X_test,  Y_test  = self.X[test_idx], self.Y[test_idx]
             
-            cls.fit(X_train, Y_train)
-            Y_prob = cls.predict_proba(X_test)
+            self.cls.fit(X_train, Y_train)
+            Y_prob = self.cls.predict_proba(X_test)
             
-            self.print_error(Y_prob, Y_test, cls.classes_)
+            self.print_error(Y_prob, Y_test, self.cls.classes_)
     
     def read_data(self):
         self.X = np.load(self.X_path)
@@ -35,14 +35,14 @@ class PredictionMachine(object):
     
     def create_folds(self):
         # 5x2 folds
-        print self.X.shape
         folds = sklearn.cross_validation.ShuffleSplit(
-             n=self.X.shape[0], n_iter=5, train_size=0.5, test_size=0.5)
+             n=self.X.shape[0], n_iter=5, train_size=0.1, test_size=0.1)
         
         return folds
 
     def print_error(self, Y_prob, Y_test, classes_):
         lb = sklearn.preprocessing.LabelBinarizer()
+        lb.fit(list(classes_))
         lb.classes_ = classes_
         Y_test_matrix = lb.transform(Y_test)
         
