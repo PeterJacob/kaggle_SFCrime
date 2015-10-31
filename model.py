@@ -7,7 +7,7 @@ class Model(object):
         self.classes_ = classes
         self.names = names
 
-    def fit(self, train_data):
+    def fit(self, train_data, labels):
         raise NotImplementedError("fit not implemented in model {0}".format(self.__class__))
 
     def predict_proba(self, X):
