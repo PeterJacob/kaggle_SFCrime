@@ -17,9 +17,10 @@ if __name__ == "__main__":
     labels = data['Category']
     classes = np.array(pd.unique(data.Category.ravel()))
 
-    data.drop('Category', 1)
-    data.drop('Descript', 1)
-    data.drop('Resolution', 1)
+    data.drop('Category', 1, inplace=True)
+    data.drop('Descript', 1, inplace=True)
+    data.drop('Resolution', 1, inplace=True)
+
     names = np.array(data.columns)
 
     np_train = np.array(data.values)
