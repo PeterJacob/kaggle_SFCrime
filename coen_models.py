@@ -37,6 +37,15 @@ class MostLikelyClassPerRegion(Model):
 
 
 
+class MostLikelyClassPerWeekPerDistrict(MostLikelyClassPerRegion):
+
+    def __init__(self, classes, names):
+        super(MostLikelyClassPerWeekPerDistrict, self).__init__(classes, names)
+
+
+    def fit(self, train_data, labels):
+        pass
+
 
 
 

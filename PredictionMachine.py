@@ -36,7 +36,7 @@ class PredictionMachine(object):
     def create_folds(self):
         # 5x2 folds
         folds = sklearn.cross_validation.ShuffleSplit(
-             n=self.X.shape[0], n_iter=5, train_size=0.1, test_size=0.1)
+             n=self.X.shape[0], n_iter=5, train_size=0.5, test_size=0.5)
         
         return folds
 
