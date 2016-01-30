@@ -13,6 +13,9 @@ class Model(object):
     def predict_proba(self, X):
         raise NotImplementedError("predict_proba not implemented in model {0}".format(self.__class__))
 
+    def getid(self, name):
+        return list(self.names).index(name)
+
     def get_classes(self):
         """
         Returns list of possible output classes and case Id
