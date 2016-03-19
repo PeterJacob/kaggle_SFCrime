@@ -9,9 +9,10 @@ class PredictionMachine(object):
     # Trains and runs a classifier supplied in the init
     # Returns the error
     
-    def __init__(self, classifier, features_path, labels_path):
+    def __init__(self, classifier, features_path, labels_path, testset_path=None):
         self.cls = classifier
         self.X_path = features_path
+        self.X2_path = testset_path
         self.Y_path = labels_path
         self.X = None
         self.Y = None
@@ -32,6 +33,9 @@ class PredictionMachine(object):
     def read_data(self):
         self.X = np.load(self.X_path)
         self.Y = np.load(self.Y_path)
+
+        if self.X2_path is not None:
+            self.X2 = np.load(self.X2_path)
     
     def create_folds(self):
         # 5x2 folds
@@ -48,3 +52,11 @@ class PredictionMachine(object):
         
         ll = sklearn.metrics.log_loss(Y_test_matrix, Y_prob)
         print ll
+
+    def predict(self):
+        if self.X2_path is None:
+            raise StandardError("No testset provided!")
+
+        self.cls.fit(self.X1, self.Y)
+        pred = self.cls.predict(self.X2)
+        return pred
