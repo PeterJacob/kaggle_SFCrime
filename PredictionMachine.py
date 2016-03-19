@@ -54,6 +54,9 @@ class PredictionMachine(object):
         print ll
 
     def predict(self):
+        if self.X2_path is None:
+            raise StandardError("No testset provided!")
+
         self.cls.fit(self.X1, self.Y)
         pred = self.cls.predict(self.X2)
         return pred
